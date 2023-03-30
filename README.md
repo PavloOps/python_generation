@@ -1,2 +1,2 @@
 # python_generation
-My solutions for "Python Generation" courses on https://stepik.org/
+My solutions for "Python Generation" courses on https://pygen.ru/
