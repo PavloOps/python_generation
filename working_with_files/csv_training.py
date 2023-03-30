@@ -74,7 +74,6 @@ def task_8():
                 print(f"{key}: {value}")
 
 
-text = 'I love you'
 if __name__ == "__main__":
     print(task_3())
     print(task_4())
