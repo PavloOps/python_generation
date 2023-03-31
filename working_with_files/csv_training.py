@@ -1,4 +1,5 @@
 import csv
+from datetime import datetime
 from collections import Counter
 
 
@@ -43,7 +44,7 @@ def csv_columns(filename):  # 6
 
 def task_7():
     with open("data.csv", encoding="UTF-8") as input_file, open(
-        "domain_usage.csv", "w", encoding="UTF-8", newline=""
+            "domain_usage.csv", "w", encoding="UTF-8", newline=""
     ) as output_file:
         data = csv.reader(input_file)  # iterator
         next(data)  # drop headers
@@ -83,6 +84,29 @@ def task_9():
         print(*map(lambda x: x[0], sorted(res, key=lambda x: x[1], reverse=True)), sep='\n')
 
 
+def task_10():
+    with open("name_log.csv", encoding="utf-8") as file_in, \
+            open("new_name_log.csv", "w", encoding="UTF-8", newline="") as file_out:
+        rows = csv.reader(file_in)
+        writer = csv.writer(file_out)
+
+        headers = next(rows)
+        writer.writerow(headers)
+
+        log_info = dict()
+        for username, email, curr_date in rows:
+            curr_date = datetime.strptime(curr_date, "%d/%m/%Y %H:%M")
+            log_info[email] = log_info.get(email, [username, email, datetime.min])
+            log_info[email] = max(log_info[email], (username, email, curr_date), key=lambda x: x[-1])
+        else:
+            result = (
+                [username, email, change_date.strftime("%d/%m/%Y %H:%M")]
+                for username, email, change_date
+                in sorted(log_info.values(), key=lambda x: x[1])
+            )
+        writer.writerows(result)
+
+
 if __name__ == "__main__":
     print(task_3())
     print(task_4())
@@ -91,3 +115,4 @@ if __name__ == "__main__":
     print(task_7())
     print(task_8())
     print(task_9())
+    task_10()
