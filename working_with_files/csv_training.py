@@ -74,6 +74,15 @@ def task_8():
                 print(f"{key}: {value}")
 
 
+def task_9():
+    with open("titanic.csv", encoding="UTF-8") as file:
+        data = csv.reader(file, delimiter=";")
+        next(data)
+
+        res = ((name, gender) for survived, name, gender, age in data if int(survived) and float(age) < 18)
+        print(*map(lambda x: x[0], sorted(res, key=lambda x: x[1], reverse=True)), sep='\n')
+
+
 if __name__ == "__main__":
     print(task_3())
     print(task_4())
@@ -81,3 +90,4 @@ if __name__ == "__main__":
     print(csv_columns("grades_test.csv"))
     print(task_7())
     print(task_8())
+    print(task_9())
