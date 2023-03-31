@@ -116,6 +116,19 @@ def condense_csv(filename: str, id_name: str):
             writer.writerow([key, *data_dict[key].values()])
 
 
+def task_12():
+    with open("student_counts.csv", encoding="utf-8") as input_file, \
+            open("sorted_student_counts.csv", "w", encoding="utf-8-sig", newline="") as output_file:
+
+        reader = csv.DictReader(input_file)
+        headers = reader.fieldnames
+        sorted_headers = [headers[0]] + sorted(headers[1:], key=lambda x: (len(x), x))
+
+        writer = csv.DictWriter(output_file, fieldnames=sorted_headers)
+        writer.writeheader()
+        writer.writerows(reader)
+
+
 if __name__ == "__main__":
     print(task_3())
     print(task_4())
@@ -126,3 +139,4 @@ if __name__ == "__main__":
     print(task_9())
     task_10()
     condense_csv("test_easier_seems.csv", "ID")
+    task_12()
