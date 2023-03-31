@@ -100,6 +100,22 @@ def task_10():
             writer.writerows(sorted(log_info.values(), key=lambda x: x[1]))
 
 
+def condense_csv(filename: str, id_name: str):
+    with open(filename, encoding="utf-8-sig") as input_file, \
+            open("condensed.csv", "w", encoding="utf-8", newline="") as output_file:
+        data, data_dict = csv.reader(input_file), dict()
+        writer = csv.writer(output_file)
+
+        for obj, feature, value in data:
+            data_dict.setdefault(obj, {}).update({feature: value})
+        else:
+            headers = [id_name, *data_dict[next(iter(data_dict))].keys()]
+
+        writer.writerow(headers)
+        for key in data_dict.keys():
+            writer.writerow([key, *data_dict[key].values()])
+
+
 if __name__ == "__main__":
     print(task_3())
     print(task_4())
@@ -109,3 +125,4 @@ if __name__ == "__main__":
     print(task_8())
     print(task_9())
     task_10()
+    condense_csv("test_easier_seems.csv", "ID")
