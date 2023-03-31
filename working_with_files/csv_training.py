@@ -1,5 +1,4 @@
 import csv
-from datetime import datetime
 from collections import Counter
 
 
@@ -94,17 +93,11 @@ def task_10():
         writer.writerow(headers)
 
         log_info = dict()
-        for username, email, curr_date in rows:
-            curr_date = datetime.strptime(curr_date, "%d/%m/%Y %H:%M")
-            log_info[email] = log_info.get(email, [username, email, datetime.min])
-            log_info[email] = max(log_info[email], (username, email, curr_date), key=lambda x: x[-1])
+        for username, email, dtime in rows:
+            log_info[email] = log_info.get(email, [username, email, ""])
+            log_info[email] = max(log_info[email], (username, email, dtime), key=lambda x: x[-1])
         else:
-            result = (
-                [username, email, change_date.strftime("%d/%m/%Y %H:%M")]
-                for username, email, change_date
-                in sorted(log_info.values(), key=lambda x: x[1])
-            )
-        writer.writerows(result)
+            writer.writerows(sorted(log_info.values(), key=lambda x: x[1]))
 
 
 if __name__ == "__main__":
