@@ -5,4 +5,4 @@ My ways of solving problems for "Python Generation" courses on https://pygen.ru/
 
 https://discord.com/invite/xZmV6AaBk8
 
-now I'm working on the part "Working with csv-files"
+now I'm working on the part "Working with JSON-files"
