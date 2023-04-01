@@ -128,8 +128,8 @@ def task_12():
         writer.writerows(reader)
 
 
-def task_13():
-    with open("prices.csv",
+def task_13(filename):
+    with open(filename,
               encoding="utf-8") as csvfile:
         dict_reader = csv.DictReader(csvfile, delimiter=";")
         result = []
@@ -140,7 +140,7 @@ def task_13():
         else:
             cheapest_item = min(result, key=lambda x: (int(x[1]), x[0], x[2]))
 
-        print(f"{cheapest_item[0]}: {cheapest_item[2]}")
+        return f"{cheapest_item[0]}: {cheapest_item[2]}"
 
 
 if __name__ == "__main__":
