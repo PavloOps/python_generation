@@ -119,7 +119,6 @@ def condense_csv(filename: str, id_name: str):
 def task_12():
     with open("student_counts.csv", encoding="utf-8") as input_file, \
             open("sorted_student_counts.csv", "w", encoding="utf-8-sig", newline="") as output_file:
-
         reader = csv.DictReader(input_file)
         headers = reader.fieldnames
         sorted_headers = [headers[0]] + sorted(headers[1:], key=lambda x: (len(x), x))
@@ -127,6 +126,21 @@ def task_12():
         writer = csv.DictWriter(output_file, fieldnames=sorted_headers)
         writer.writeheader()
         writer.writerows(reader)
+
+
+def task_13():
+    with open("prices.csv",
+              encoding="utf-8") as csvfile:
+        dict_reader = csv.DictReader(csvfile, delimiter=";")
+        result = []
+
+        for dictionary in dict_reader:
+            temp = min(list(dictionary.items())[1:], key=lambda x: (int(x[1]), x))
+            result.append((*temp, dictionary["Магазин"]))
+        else:
+            cheapest_item = min(result, key=lambda x: (int(x[1]), x[0], x[2]))
+
+        print(f"{cheapest_item[0]}: {cheapest_item[2]}")
 
 
 if __name__ == "__main__":
@@ -140,3 +154,4 @@ if __name__ == "__main__":
     task_10()
     condense_csv("test_easier_seems.csv", "ID")
     task_12()
+    task_13()
