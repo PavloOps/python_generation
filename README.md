@@ -1,5 +1,5 @@
 # python_generation
-My solutions for "Python Generation" courses on https://pygen.ru/
+My ways of solving problems for "Python Generation" courses on https://pygen.ru/
 
 ![alt text](https://static.tildacdn.com/tild3337-3861-4136-b131-376533663435/logo-pygen-22.png)
 
