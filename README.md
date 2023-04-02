@@ -1,7 +1,10 @@
 # python_generation
 My ways of solving problems for "Python Generation" courses on https://pygen.ru/
 
+<font color="green"> Warning: I strongly don't recommend you to use these materials before your own solution!</font>
+
 ![alt text](https://static.tildacdn.com/tild3337-3861-4136-b131-376533663435/logo-pygen-22.png)
+
 
 https://discord.com/invite/xZmV6AaBk8
 
