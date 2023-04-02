@@ -70,9 +70,24 @@ def is_correct_json(string: str) -> bool:
         return False
 
 
+def task6():
+    json_string = """{
+     "type": "donut", 
+     "name": "Cake", 
+     "tastes": ["chocolate", "cream", "strawberry"]
+    }"""
+    for key, value in json.loads(json_string).items():
+        if isinstance(value, list):
+            print(f"{key}:", end=' ')
+            print(*value, sep=', ', end='\n')
+        else:
+            print(f"{key}: {value}")
+
+
 if __name__ == "__main__":
     print(task1())
     print(task2())
     print(task3())
     print(task4())
     print(is_correct_json('number = 17'))
+    print(task6())

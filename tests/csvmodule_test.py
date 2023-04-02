@@ -14,10 +14,8 @@ class CsvTask13Test(TestCase):
 
 
 class JsonTest(TestCase):
-    def test_json_task5_pos(self):
+    def test_json_task5(self):
         self.assertEqual(is_correct_json('{"name": "Barsik", "age": 7, "meal": "Wiskas"}'), True)
-
-    def test_json_task5_neg(self):
         self.assertEqual(is_correct_json('number = 17'), False)
 
 if __name__ == "__main__":  # for debugging of tests themselves
