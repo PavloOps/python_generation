@@ -6,3 +6,7 @@ My ways of solving problems for "Python Generation" courses on https://pygen.ru/
 https://discord.com/invite/xZmV6AaBk8
 
 now I'm working on the part "JSON-files"
+
+https://stepik.org/cert/1635195
+
+https://stepik.org/cert/1485507
