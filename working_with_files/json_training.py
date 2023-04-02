@@ -62,8 +62,17 @@ def task4():
     return specs_json
 
 
+def is_correct_json(string: str) -> bool:
+    try:
+        res = json.loads(string)
+        return True
+    except json.decoder.JSONDecodeError:
+        return False
+
+
 if __name__ == "__main__":
     print(task1())
     print(task2())
     print(task3())
     print(task4())
+    print(is_correct_json('number = 17'))

@@ -1,5 +1,6 @@
 from unittest import TestCase, main
 from working_with_files.csv_training import task_13
+from working_with_files.json_training import is_correct_json
 
 
 class CsvTask13Test(TestCase):
@@ -11,6 +12,13 @@ class CsvTask13Test(TestCase):
 
     # here should be negative tests
 
+
+class JsonTest(TestCase):
+    def test_json_task5_pos(self):
+        self.assertEqual(is_correct_json('{"name": "Barsik", "age": 7, "meal": "Wiskas"}'), True)
+
+    def test_json_task5_neg(self):
+        self.assertEqual(is_correct_json('number = 17'), False)
 
 if __name__ == "__main__":  # for debugging of tests themselves
     main()
