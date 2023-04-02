@@ -7,8 +7,8 @@ def task1():
                  'Cuba': 'Havana', 'France': 'Paris', 'Gabon': 'Libreville', 'Liberia': 'Monrovia',
                  'Angola': 'Luanda', 'India': 'New Delhi', 'Canada': 'Ottawa', 'Australia': 'Canberra'}
 
-    res = json.dumps(countries, separators=(',', ' - '), indent=3, sort_keys=True)
-    return res
+    result = json.dumps(countries, separators=(',', ' - '), indent=3, sort_keys=True)
+    return result
 
 
 if __name__ == "__main__":
