@@ -100,6 +100,20 @@ def task7():
         json.dump(res, output_file, indent=3)
 
 
+def task8():
+    with open("data1_8.json", encoding="utf-8") as json_input1, \
+            open("data2_8.json", encoding="utf-8") as json_input2, \
+            open("data_merge.json", "w", encoding="utf-8") as json_output:
+        json1, json2 = json.load(json_input1), json.load(json_input2)
+
+        result = {
+            key: json2.get(key)
+            if json2.get(key) else json1.get(key)
+            for key in set(json1.keys() | json2.keys())}
+
+        json.dump(result, json_output, indent=3, sort_keys=True)
+
+
 if __name__ == "__main__":
     print(task1())
     print(task2())
@@ -108,3 +122,4 @@ if __name__ == "__main__":
     print(is_correct_json('number = 17'))
     print(task6())
     task7()
+    task8()
