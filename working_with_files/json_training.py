@@ -114,6 +114,29 @@ def task8():
         json.dump(result, json_output, indent=3, sort_keys=True)
 
 
+def task9():
+    with open("people.json", encoding="utf-8") as input_file, \
+            open("updated_people.json", "w", encoding="utf-8") as output_file:
+        data = json.load(input_file)
+        common_keys = set()
+
+        for json_object in data:
+            for key in json_object.keys():
+                common_keys.add(key)
+        else:
+            dict_to_join = dict.fromkeys(common_keys)
+
+        for json_object in data:
+            for key in common_keys:
+                json_object.setdefault(key, None)
+
+        json.dump(data, output_file, indent=3)
+
+        # with open('people.json', encoding='utf8') as fi, open('updated_people.json', 'w') as fo:
+        #     people = json.load(fi)
+        #     d = {k: None for i in people for k in i.keys()}
+        #     json.dump([d | i for i in people], fo)
+
 if __name__ == "__main__":
     print(task1())
     print(task2())
@@ -123,3 +146,4 @@ if __name__ == "__main__":
     print(task6())
     task7()
     task8()
+    task9()
