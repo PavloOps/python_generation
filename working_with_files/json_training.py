@@ -13,18 +13,18 @@ def task1():
 
 def task2():
     words = {
-             frozenset(["tap", "telephone"]): ("tæp", "telifəun"),
-             "travel": "trævl",
-             ("hello", "world"): ("həˈləʊ", "wɜːld"),
-             "moonlight": "muːn.laɪt",
-             "sunshine": "ˈsʌn.ʃaɪn",
-             ("why", "is", "so", "difficult"): ("waɪ", "ɪz", "səʊ", "ˈdɪfɪkəlt"),
-             "adventure": "ədˈventʃər",
-             "beautiful": "ˈbjuːtɪfl",
-             frozenset(["spoon", "block"]): ("spu:n", "blɔk"),
-             "bicycle": "baisikl",
-             ("pilot", "fly"): ("pailət", "flai")
-            }
+        frozenset(["tap", "telephone"]): ("tæp", "telifəun"),
+        "travel": "trævl",
+        ("hello", "world"): ("həˈləʊ", "wɜːld"),
+        "moonlight": "muːn.laɪt",
+        "sunshine": "ˈsʌn.ʃaɪn",
+        ("why", "is", "so", "difficult"): ("waɪ", "ɪz", "səʊ", "ˈdɪfɪkəlt"),
+        "adventure": "ədˈventʃər",
+        "beautiful": "ˈbjuːtɪfl",
+        frozenset(["spoon", "block"]): ("spu:n", "blɔk"),
+        "bicycle": "baisikl",
+        ("pilot", "fly"): ("pailət", "flai")
+    }
     data_json = json.dumps(words, ensure_ascii=False, skipkeys=True)
     return data_json
 
@@ -48,15 +48,15 @@ def task3():
 
 def task4():
     specs = {
-             'Модель': 'AMD Ryzen 5 5600G',
-             'Год релиза': 2021,
-             'Сокет': 'AM4',
-             'Техпроцесс': '7 нм',
-             'Ядро': 'Cezanne',
-             'Объем кэша L2': '3 МБ',
-             'Объем кэша L3': '16 МБ',
-             'Базовая частота': '3900 МГц'
-            }
+        'Модель': 'AMD Ryzen 5 5600G',
+        'Год релиза': 2021,
+        'Сокет': 'AM4',
+        'Техпроцесс': '7 нм',
+        'Ядро': 'Cezanne',
+        'Объем кэша L2': '3 МБ',
+        'Объем кэша L3': '16 МБ',
+        'Базовая частота': '3900 МГц'
+    }
 
     specs_json = json.dumps(specs, indent=3, ensure_ascii=False)
     return specs_json
@@ -84,6 +84,22 @@ def task6():
             print(f"{key}: {value}")
 
 
+def task7():
+    actions = {
+        str: lambda x: f"{x}!",
+        int: lambda x: x + 1,
+        bool: lambda x: not x,
+        list: lambda x: x * 2,
+        dict: lambda x: {**x, **{"newkey": None}}
+    }
+
+    with open("data7.json", encoding="utf-8") as input_file, \
+            open("updated_data.json", "w", encoding="utf-8") as output_file:
+        data = json.load(input_file)
+        res = [actions[type(x)](x) for x in data if x is not None]
+        json.dump(res, output_file, indent=3)
+
+
 if __name__ == "__main__":
     print(task1())
     print(task2())
@@ -91,3 +107,4 @@ if __name__ == "__main__":
     print(task4())
     print(is_correct_json('number = 17'))
     print(task6())
+    task7()
