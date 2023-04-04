@@ -163,6 +163,18 @@ def task11():
             json.dump(result, output_file, ensure_ascii=False, indent=3)
 
 
+def task12():
+    with open("students.json", encoding="utf-8") as input_file, \
+            open("data12.csv", "w", encoding="utf-8", newline="") as output_file:
+        data = json.load(input_file)
+        res = [{"name": d["name"], "phone": d["phone"]} for d in data if int(d["age"]) >= 18 and int(d["progress"]) >= 75]
+        res.sort(key=lambda x: x["name"])
+        fieldnames = ["name", "phone"]
+        writer = csv.DictWriter(output_file, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(res)
+
+
 if __name__ == "__main__":
     print(task1())
     print(task2())
@@ -175,3 +187,4 @@ if __name__ == "__main__":
     task9()
     task10()
     task11()
+    task12()
