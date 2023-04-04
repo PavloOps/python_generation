@@ -137,6 +137,18 @@ def task9():
         #     d = {k: None for i in people for k in i.keys()}
         #     json.dump([d | i for i in people], fo)
 
+
+def task10():
+    with open("countries.json", encoding="utf-8") as input_file,\
+            open("religion.json", "w", encoding="utf-8") as output_file:
+        data, result = json.load(input_file), {}
+
+        for d in data:
+            result.setdefault(d["religion"], []).append(d.get("country"))
+
+        json.dump(result, output_file, indent=3)
+
+
 if __name__ == "__main__":
     print(task1())
     print(task2())
@@ -147,3 +159,4 @@ if __name__ == "__main__":
     task7()
     task8()
     task9()
+    task10()
