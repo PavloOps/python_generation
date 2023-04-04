@@ -1,4 +1,5 @@
 import json
+import csv
 
 
 def task1():
@@ -139,7 +140,7 @@ def task9():
 
 
 def task10():
-    with open("countries.json", encoding="utf-8") as input_file,\
+    with open("countries.json", encoding="utf-8") as input_file, \
             open("religion.json", "w", encoding="utf-8") as output_file:
         data, result = json.load(input_file), {}
 
@@ -147,6 +148,19 @@ def task10():
             result.setdefault(d["religion"], []).append(d.get("country"))
 
         json.dump(result, output_file, indent=3)
+
+
+def task11():
+    with open("playgrounds.csv", encoding="utf-8") as input_file, \
+            open("addresses.json", "w", encoding="utf-8") as output_file:
+        data = csv.DictReader(input_file, delimiter=";")
+        result = {}
+
+        for curr_dict in data:
+            result.setdefault(curr_dict["AdmArea"], dict())
+            result[curr_dict["AdmArea"]].setdefault(curr_dict["District"], []).append(curr_dict["Address"])
+        else:
+            json.dump(result, output_file, ensure_ascii=False, indent=3)
 
 
 if __name__ == "__main__":
@@ -160,3 +174,4 @@ if __name__ == "__main__":
     task8()
     task9()
     task10()
+    task11()
