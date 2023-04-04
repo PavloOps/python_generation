@@ -1,5 +1,6 @@
 import json
 import csv
+from datetime import datetime
 
 
 def task1():
@@ -167,12 +168,50 @@ def task12():
     with open("students.json", encoding="utf-8") as input_file, \
             open("data12.csv", "w", encoding="utf-8", newline="") as output_file:
         data = json.load(input_file)
-        res = [{"name": d["name"], "phone": d["phone"]} for d in data if int(d["age"]) >= 18 and int(d["progress"]) >= 75]
+        res = [{"name": d["name"], "phone": d["phone"]} for d in data if
+               int(d["age"]) >= 18 and int(d["progress"]) >= 75]
         res.sort(key=lambda x: x["name"])
         fieldnames = ["name", "phone"]
         writer = csv.DictWriter(output_file, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(res)
+
+
+def task13():
+    with open("pools.json", encoding="utf-8") as input_file:
+        pattern = "%H:%M"
+        start_time = datetime.strptime("10:00", pattern)
+        end_time = datetime.strptime("12:00", pattern)
+        data = json.load(input_file)
+
+        res = []
+        for curr_dict in data:
+            start_curr, end_curr = curr_dict["WorkingHoursSummer"]["Понедельник"].split("-")
+            start_curr, end_curr = datetime.strptime(start_curr, pattern), datetime.strptime(end_curr, pattern)
+            if start_curr <= start_time and end_curr >= end_time:
+                res.append(
+                    (
+                        curr_dict.get("DimensionsSummer").get("Length"),
+                        curr_dict.get("DimensionsSummer").get("Width"),
+                        curr_dict.get("Address")))
+        else:
+            pool = max(res, key=lambda x: (int(x[0]), int(x[1])))
+            print(f"{pool[0]}x{pool[1]}\n{pool[2]}")
+
+    # def best_pool(data: dict):
+    #     monday_time = data["WorkingHoursSummer"]["Понедельник"].split("-")
+    #     start, finish = [int(time.split(":")[0]) for time in monday_time]
+    #     time = True if start <= 10 and finish >= 12 else False
+    #     dimensions = data["DimensionsSummer"]
+    #
+    #     return (time, dimensions["Length"], dimensions["Width"])
+    #
+    # with open("pools.json", "r", encoding="utf-8") as input_file:
+    #     input_data = json.load(input_file)
+    #
+    #     choice = max(input_data, key=best_pool)
+    #     print(f'{choice["DimensionsSummer"]["Length"]}x{choice["DimensionsSummer"]["Width"]}')
+    #     print(choice["Address"])
 
 
 if __name__ == "__main__":
@@ -188,3 +227,4 @@ if __name__ == "__main__":
     task10()
     task11()
     task12()
+    task13()
