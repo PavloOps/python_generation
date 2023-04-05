@@ -262,6 +262,34 @@ def task15(filename):
         return f"{district}: {districts[district]}", f"{company}: {nets[company]}"
 
 
+def task16():
+    with open("food_services.json", encoding="utf-8") as input_file:
+        data = json.load(input_file)
+        result = {}
+
+        for curr_dict in data:
+            result.setdefault(
+                curr_dict["TypeObject"],
+                (curr_dict["Name"], curr_dict["SeatsCount"])
+            )
+
+            result[curr_dict["TypeObject"]] = max(
+                result.get(curr_dict["TypeObject"]),
+                (curr_dict["Name"], curr_dict["SeatsCount"]),
+                key=lambda x: x[1]
+            )
+        else:
+            for key, value in sorted(result.items(), key=lambda x: x[0]):
+                print(f"{key}: {value[0]}, {value[1]}")
+
+    # with open('food_services.json', 'r', encoding='utf-8') as f1:
+    # data = json.load(f1)
+    # d = {i['TypeObject']: f"{i['Name']}, {i['SeatsCount']}" for i
+    #      in sorted(data, key=lambda x:(x['TypeObject'], x['SeatsCount']))}
+    # for item in d.items():
+    #     print(f'{item[0]}: {item[1]}')
+
+
 if __name__ == "__main__":
     print(task1())
     print(task2())
@@ -278,3 +306,4 @@ if __name__ == "__main__":
     task13()
     task14()
     print(*task15(), sep='\n')
+    task16()
