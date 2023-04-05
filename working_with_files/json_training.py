@@ -214,6 +214,38 @@ def task13():
     #     print(choice["Address"])
 
 
+def task14():
+    with open("exam_results.csv", encoding="utf-8") as input_file, \
+            open("best_scores.json", "w", encoding="utf-8") as output_file:
+        reader = csv.DictReader(input_file)
+        result = {}
+
+        for line in reader:
+            curr_dict = {"best_score" if k == "score" else k: v for k, v in line.items()}
+            curr_dict["best_score"] = int(curr_dict["best_score"])
+            result.setdefault(curr_dict.get("email"), curr_dict)
+
+            if curr_dict["best_score"] >= result[curr_dict["email"]]["best_score"] \
+                    and curr_dict["date_and_time"] > result[curr_dict["email"]]["date_and_time"]:
+                result[curr_dict["email"]].update(curr_dict)
+
+        else:
+            json.dump(sorted(result.values(), key=lambda x: x.get("email")), output_file, indent=3)
+
+        # result = {}
+        # with open('exam_results.csv', encoding='utf-8') as ex_r:
+        #     rows = csv.DictReader(ex_r)  # 1
+        #     for row in rows:
+        #         row['best_score'] = int(row.pop('score'))  # 2
+        #         r = result.get(row['email'], row)  # 3
+        #         best_row = max(r, row, key=lambda item: (item['best_score'], datetime.fromisoformat(item['date_and_time'])))  # 4
+        #         result[row['email']] = best_row  # 5
+        #
+        # with open('best_scores.json', 'w', encoding='utf-8') as bs:
+        #     out = sorted(result.values(), key=lambda item: item['email'])  # 6
+        #     json.dump(out, bs, indent=3)  # 7
+
+
 if __name__ == "__main__":
     print(task1())
     print(task2())
@@ -228,3 +260,4 @@ if __name__ == "__main__":
     task11()
     task12()
     task13()
+    task14()
