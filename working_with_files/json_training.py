@@ -238,12 +238,28 @@ def task14():
         #     for row in rows:
         #         row['best_score'] = int(row.pop('score'))  # 2
         #         r = result.get(row['email'], row)  # 3
-        #         best_row = max(r, row, key=lambda item: (item['best_score'], datetime.fromisoformat(item['date_and_time'])))  # 4
+        #         best_row = max(r, row, key=lambda item: (
+        #               item['best_score'], datetime.fromisoformat(item['date_and_time'])))  # 4
         #         result[row['email']] = best_row  # 5
         #
         # with open('best_scores.json', 'w', encoding='utf-8') as bs:
         #     out = sorted(result.values(), key=lambda item: item['email'])  # 6
         #     json.dump(out, bs, indent=3)  # 7
+
+
+def task15(filename):
+    with open(filename, encoding="utf-8") as input_file:
+        data, districts, nets = json.load(input_file), {}, {}
+
+        for curr_dict in data:
+            districts[curr_dict["District"]] = districts.get(curr_dict["District"], 0) + 1
+            if curr_dict["IsNetObject"] == "да":
+                nets[curr_dict["OperatingCompany"]] = nets.get(curr_dict["OperatingCompany"], 0) + 1
+        else:
+            district = max(districts, key=districts.get)
+            company = max(nets, key=nets.get)
+
+        return f"{district}: {districts[district]}", f"{company}: {nets[company]}"
 
 
 if __name__ == "__main__":
@@ -261,3 +277,4 @@ if __name__ == "__main__":
     task12()
     task13()
     task14()
+    print(*task15(), sep='\n')

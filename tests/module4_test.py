@@ -1,7 +1,7 @@
 import json
 from unittest import TestCase, main
 from working_with_files.csv_training import task_13
-from working_with_files.json_training import is_correct_json
+from working_with_files.json_training import is_correct_json, task15
 
 
 class CsvTask13Test(TestCase):
@@ -28,6 +28,11 @@ class JsonTest(TestCase):
             answer = json.load(file)
             res = json.load(check_file)
         self.assertListEqual(res, answer)
+
+    def test_json_task15(self):
+        self.assertEqual(
+            task15(r"C:\Users\Olya\PycharmProjects\learning_Python_generation\working_with_files\food_services.json"),
+            ("Тверской район: 963", "KFC: 230"))
 
 
 if __name__ == "__main__":  # for debugging of tests themselves
