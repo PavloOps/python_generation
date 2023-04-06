@@ -1,6 +1,7 @@
+import json
 from zipfile import ZipFile
 from datetime import datetime
-
+from working_with_files.json_training import is_correct_json
 
 # lecture
 
@@ -91,9 +92,30 @@ def extract_this(zip_name, *args):
         zip_file.extractall(members=args if args else None)
 
 
+def task9():
+    with ZipFile('data.zip') as zip_file:
+        result = []
+        for item in zip_file.infolist():
+            if not item.is_dir():
+                try:
+                    with zip_file.open(item.filename) as file:
+                        data = file.read().decode("utf-8")
+                        if is_correct_json(data):
+                            curr_dict = json.loads(data)
+                            team = curr_dict.get("team")
+                            if team and team == "Arsenal":
+                                result.append((curr_dict.get("first_name"), curr_dict.get("last_name")))
+                except UnicodeDecodeError:
+                    continue
+        else:
+            for player in sorted(result):
+                print(*player)
+
+
 if __name__ == "__main__":
     print(task1("test.zip"))
     print(task2("workbook.zip"))
     print(task3("workbook.zip"))
     print(*task4("workbook.zip"), sep='\n')
     task5()
+    print(task9())
