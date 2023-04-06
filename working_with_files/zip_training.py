@@ -86,6 +86,11 @@ def task5():
       Объем сжатого файла: {file[3]} байт(а)\n""")
 
 
+def extract_this(zip_name, *args):
+    with ZipFile(zip_name) as zip_file:
+        zip_file.extractall(members=args if args else None)
+
+
 if __name__ == "__main__":
     print(task1("test.zip"))
     print(task2("workbook.zip"))
