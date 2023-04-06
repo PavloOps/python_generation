@@ -54,6 +54,21 @@ class ZipTest(TestCase):
             r"C:\Users\Olya\PycharmProjects\learning_Python_generation\working_with_files\workbook.zip"),
         "fontlist-v330.json", "fontlist-v330.json")
 
+    def test_zip_task4(self):
+        self.assertListEqual(zip_training.task4(
+            r"C:\Users\Olya\PycharmProjects\learning_Python_generation\working_with_files\workbook.zip"),
+            [
+                'countries.json',
+                'data_sample.csv',
+                'earth.jpg', 'exam.txt',
+                'fipi_demo_2022.pdf',
+                'homework.py', 'python.pdf',
+                'readme.txt',
+                'shopping_list.txt',
+                'task_results.xlsx'
+            ]
+        )
+
 
 if __name__ == "__main__":  # for debugging of tests themselves
     main()

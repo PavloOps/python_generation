@@ -1,4 +1,5 @@
 from zipfile import ZipFile
+from datetime import datetime
 
 
 # lecture
@@ -53,7 +54,21 @@ def task3(filename):
         return result.rsplit("/", 1)[-1]
 
 
+def task4(filename):
+    with ZipFile(filename) as zipfile:
+        files_info = zipfile.infolist()
+        pattern = "%Y-%m-%d %H:%M:%S"
+        checkpoint = datetime.strptime("2021-11-30 14:22:00", pattern)
+        res = (
+            f.filename.rsplit("/", 1)[-1]
+            for f in files_info
+            if datetime(*f.date_time) > checkpoint and not f.is_dir()
+        )
+        return sorted(res)
+
+
 if __name__ == "__main__":
     print(task1("test.zip"))
     print(task2("workbook.zip"))
     print(task3("workbook.zip"))
+    print(*task4("workbook.zip"), sep='\n')
