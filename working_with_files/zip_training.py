@@ -67,8 +67,28 @@ def task4(filename):
         return sorted(res)
 
 
+def task5():
+    with ZipFile("workbook.zip") as zip_file:
+        files_info = zip_file.infolist()
+        files = (
+            (
+                item.filename.rsplit("/", 1)[-1],
+                datetime(*item.date_time).strftime("%Y-%m-%d %H:%M:%S"),
+                item.file_size,
+                item.compress_size
+            )
+            for item in files_info if not item.is_dir()
+        )
+        for file in sorted(files, key=lambda x: x[0]):
+            print(f"""{file[0]}
+      Дата модификации файла: {file[1]}
+      Объем исходного файла: {file[2]} байт(а)
+      Объем сжатого файла: {file[3]} байт(а)\n""")
+
+
 if __name__ == "__main__":
     print(task1("test.zip"))
     print(task2("workbook.zip"))
     print(task3("workbook.zip"))
     print(*task4("workbook.zip"), sep='\n')
+    task5()
