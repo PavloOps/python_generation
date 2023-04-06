@@ -7,7 +7,7 @@ $${\color{red}Warning:  \space I  \space strongly  \space don't  \space recommen
 
 https://discord.com/invite/xZmV6AaBk8
 
-now I'm working on the part "JSON-files"
+now I'm working on the part "ZIP-files"
 
 https://stepik.org/cert/1635195
 
