@@ -2,7 +2,7 @@ import json
 from unittest import TestCase, main
 from working_with_files.csv_training import task_13
 from working_with_files.json_training import is_correct_json, task15
-from working_with_files.zip_training import task1
+from working_with_files.zip_training import task1, task2
 
 
 class CsvTask13Test(TestCase):
@@ -40,6 +40,12 @@ class ZipTest(TestCase):
     def test_zip_task1(self):
         self.assertEqual(
             task1(r"C:\Users\Olya\PycharmProjects\learning_Python_generation\working_with_files\test.zip"), 10)
+
+    def test_zip_task2(self):
+        self.assertEqual(
+            task2(r"C:\Users\Olya\PycharmProjects\learning_Python_generation\working_with_files\workbook.zip"),
+        f"""Объем исходных файлов: 17118701 байт(а)
+Объем сжатых файлов: 15693720 байт(а)""")
 
 
 if __name__ == "__main__":  # for debugging of tests themselves

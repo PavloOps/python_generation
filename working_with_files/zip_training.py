@@ -30,9 +30,20 @@ def task1(filename):
     with ZipFile(filename) as zip_file:
         files_info = zip_file.infolist()
         res = [item for item in files_info if item.file_size]
+        # res = [item for item in files_info if not item.is_dir()]
 
         return len(res)
 
 
+def task2(filename):
+    with ZipFile(filename) as zip_file:
+        files_info = zip_file.infolist()
+        sum_initial_size = sum(item.file_size for item in files_info)
+        sum_compress_size = sum(item.compress_size for item in files_info)
+        return f"""Объем исходных файлов: {sum_initial_size} байт(а)
+Объем сжатых файлов: {sum_compress_size} байт(а)"""
+
+
 if __name__ == "__main__":
     print(task1("test.zip"))
+    print(task2("workbook.zip"))
