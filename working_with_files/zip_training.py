@@ -44,6 +44,16 @@ def task2(filename):
 Объем сжатых файлов: {sum_compress_size} байт(а)"""
 
 
+def task3(filename):
+    with ZipFile(filename) as zip_file:
+        files_info = zip_file.infolist()
+        coef_compress = (((item.compress_size / item.file_size) * 100, item.filename)
+                         for item in files_info if not item.is_dir())
+        result = min(coef_compress, key=lambda x: x[0])[1]
+        return result.rsplit("/", 1)[-1]
+
+
 if __name__ == "__main__":
     print(task1("test.zip"))
     print(task2("workbook.zip"))
+    print(task3("workbook.zip"))
