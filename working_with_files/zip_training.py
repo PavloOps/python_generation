@@ -1,7 +1,9 @@
 import json
+import os.path
 from zipfile import ZipFile
 from datetime import datetime
 from working_with_files.json_training import is_correct_json
+from math import floor, log
 
 # lecture
 
@@ -112,6 +114,31 @@ def task9():
                 print(*player)
 
 
+def get_unit_name(size: int) -> str:
+    unit_names = ('B', 'KB', 'MB', 'GB', 'TB')
+    pwr = floor(log(size, 1024))
+    return f'{size / 1024 ** pwr:.0f} {unit_names[pwr]}'
+
+
+def get_unit_name(size: int) -> str:
+    unit_names = ('B', 'KB', 'MB', 'GB', 'TB')
+    pwr = floor(log(size, 1024))
+    return f'{size / 1024 ** pwr:.0f} {unit_names[pwr]}'
+
+
+def task10():
+    with ZipFile("desktop.zip") as zip_file:
+        for item in zip_file.infolist():
+            path_structure = item.filename.strip("/").split("/")
+            indent = (len(path_structure)-1)*2
+
+            if item.is_dir():
+                print(" "*indent + path_structure[-1])
+            else:
+                title, init_size = os.path.basename(item.filename), get_unit_name(item.file_size)
+                print(' '*indent + title, init_size)
+
+
 if __name__ == "__main__":
     print(task1("test.zip"))
     print(task2("workbook.zip"))
@@ -119,3 +146,4 @@ if __name__ == "__main__":
     print(*task4("workbook.zip"), sep='\n')
     task5()
     print(task9())
+    print(task10())
