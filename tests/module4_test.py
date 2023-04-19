@@ -1,8 +1,11 @@
 import json
+from collections import OrderedDict
 from unittest import TestCase, main
 from working_with_files.csv_training import task_13
 from working_with_files.json_training import is_correct_json, task15
 from working_with_files import zip_training
+from working_with_files.collections_training import wins
+from working_with_files.collections_training import task2_ordered_dict
 
 
 class CsvTask13Test(TestCase):
@@ -69,6 +72,22 @@ class ZipTest(TestCase):
             ]
         )
 
+
+class CollectionsTest(TestCase):
+
+    def test_wins(self):
+        result1 = wins([('Тимур', 'Артур'), ('Тимур', 'Дима'), ('Дима', 'Артур')])
+        result2 = wins([('Артур', 'Дима'), ('Артур', 'Тимур'), ('Артур', 'Анри'), ('Дима', 'Артур')])
+        answer1 = {'Тимур': {'Дима', 'Артур'}, 'Дима': {'Артур'}}
+        answer2 = {'Артур': {'Дима', 'Тимур', 'Анри'}, 'Дима': {'Артур'}}
+        self.assertEqual(result1, answer1)
+        self.assertEqual(result2, answer2)
+
+    def test_task2_ordered_dict(self):
+        data = OrderedDict(key1='value1', key2='value2', key3='value3', key4='value4')
+        result = task2_ordered_dict(data)
+        answer = OrderedDict([('key1', 'value1'), ('key4', 'value4'), ('key2', 'value2'), ('key3', 'value3')])
+        self.assertEqual(result, answer)
 
 if __name__ == "__main__":  # for debugging of tests themselves
     main()
