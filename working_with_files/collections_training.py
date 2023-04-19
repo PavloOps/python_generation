@@ -335,3 +335,22 @@ def task3_counter():
     data = "рубашка,футболка,футболка,брюки,футболка,рубашка,носки,рубашка"
     for good, count in sorted(Counter(data.split(',')).items(), key=lambda x: x[0]):
         print(f"{good}: {count}")
+
+
+def task4_counter():
+    goods = "рубашка,футболка,футболка,брюки,футболка,сырный соус,рубашка,носки,рубашка"
+    count_dict = Counter(goods.split(','))
+    ident = len(max(count_dict, key=len))
+
+    for key in sorted(count_dict):
+        price, amount = sum(map(ord, "".join(key.split()))), count_dict[key]
+        print(f"{key.ljust(ident)}: {price} UC x {amount} = {price*amount} UC")
+
+
+def task5_counter():
+    count_dict = Counter()
+    with open("pythonzen.txt", encoding="utf-8") as txt_file:
+        for line in txt_file.readlines():
+            count_dict.update(filter(str.isalpha, line.lower()))
+        else:
+            [print(f"{key}: {count_dict[key]}") for key in sorted(count_dict) if key]
