@@ -6,6 +6,7 @@ from working_with_files.json_training import is_correct_json, task15
 from working_with_files import zip_training
 from working_with_files.collections_training import wins
 from working_with_files.collections_training import task2_ordered_dict
+from working_with_files.collections_training import count_occurences
 
 
 class CsvTask13Test(TestCase):
@@ -88,6 +89,22 @@ class CollectionsTest(TestCase):
         result = task2_ordered_dict(data)
         answer = OrderedDict([('key1', 'value1'), ('key4', 'value4'), ('key2', 'value2'), ('key3', 'value3')])
         self.assertEqual(result, answer)
+
+    def test_count_occurences(self):
+        word1 = 'python'
+        words1 = 'Python Conferences python training python events'
+        answer1 = 3
+
+        word2 = 'Java'
+        words2 = 'Python C++ C# JavaScript Go Assembler'
+        answer2 = 0
+
+        result1 = count_occurences(word1, words1)
+        result2 = count_occurences(word2, words2)
+
+        self.assertEqual(result1, answer1)
+        self.assertEqual(result2, answer2)
+
 
 if __name__ == "__main__":  # for debugging of tests themselves
     main()
