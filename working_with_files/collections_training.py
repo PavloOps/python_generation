@@ -1,4 +1,5 @@
 import csv
+import json
 from collections import namedtuple
 from datetime import datetime
 from collections import defaultdict
@@ -396,3 +397,37 @@ def task7_counter2():
             counter.update({user['email']})
     for key, value in sorted(counter.items(), key=lambda x: x):
         print(f"{key}: {value}")
+
+
+def scrabble(symbols: str, word: str) -> bool:
+    return Counter(symbols) >= Counter(word)
+
+
+def print_bar_chart(data: str | list[str], mark: str):
+    counter = Counter(data)
+    ident = len(max(data, key=len)) if isinstance(data, list) else 1
+
+    for key, value in sorted(counter.items(), key=lambda x: -x[1]):
+        print(f"{key.ljust(ident)}|{mark*value}")
+
+
+def task10_counter2():
+    counter = Counter()
+    with open("prices.json", encoding="utf-8") as json_file:
+        prices = json.load(json_file)
+
+        for i in range(1, 5):
+            with open(f"quarter{i}.csv", encoding="utf-8") as csv_file:
+                _, *rows = csv.reader(csv_file)
+
+                for name, *counts in rows:
+                    counter.update({name: sum(map(int, counts))*prices[name]})
+    print(counter.total())
+
+
+def main():
+    pass
+
+
+if __name__ == "main":
+    main()
