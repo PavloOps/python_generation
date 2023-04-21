@@ -380,3 +380,19 @@ def task4_counter2(data: str):
     counter = Counter(map(len, data.lower().split()))
     result = [f"Слов длины {key}: {value}" for key, value in sorted(counter.items(), key=lambda x: x[1])]
     return "\n".join(result)
+
+
+def task6_counter2():
+    data = Counter('aksjaskfjsklfjdslkfjajfopewtoieqpwdpqworiiqjskanvmcxbmpewrqopkqwlmdzczmxvmvlnjpjqpkqzxvmbowiqeorewi')
+    data.__dict__["min_values"] = lambda: [item for item in sorted(filter(lambda x: x[1] == min(data.values()), data.items()))]
+    data.max_values = lambda: [item for item in sorted(filter(lambda x: x[1] == max(data.values()), data.items()))]
+    print(data.max_values())
+
+
+def task7_counter2():
+    counter = Counter()
+    with open("name_log2.csv", encoding="utf-8") as csv_file:
+        for user in csv.DictReader(csv_file):
+            counter.update({user['email']})
+    for key, value in sorted(counter.items(), key=lambda x: x):
+        print(f"{key}: {value}")
