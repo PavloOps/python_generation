@@ -354,3 +354,29 @@ def task5_counter():
             count_dict.update(filter(str.isalpha, line.lower()))
         else:
             [print(f"{key}: {count_dict[key]}") for key in sorted(count_dict) if key]
+
+
+def task1_counter2():
+    data = "Арбуз Малина малина Арбуз клубника АрбуЗ Банан Малина вишня Черешня Вишня арбуз"
+    result = Counter(data.lower().split())
+    print(result.most_common()[0][0])
+
+
+def task2_counter2():
+    data = "Арбуз Малина Малина Арбуз Клубника арбуз банан малина вишня черешня вишня арбуЗ"
+    counter = Counter(data.lower().split())
+    minimum = min(counter.values())
+    print(", ".join(item[0] for item in sorted(filter(lambda x: x[1] == minimum, counter.items()))))
+
+
+def task3_counter2():
+    data = "малина малина клубника арбуз банан малина черешня вишня арбуз клубника банан малина"
+    counter = Counter(data.lower().split())
+    result = max(counter.items(), key=lambda x: (x[1], x[0]))
+    print(result[0])
+
+
+def task4_counter2(data: str):
+    counter = Counter(map(len, data.lower().split()))
+    result = [f"Слов длины {key}: {value}" for key, value in sorted(counter.items(), key=lambda x: x[1])]
+    return "\n".join(result)

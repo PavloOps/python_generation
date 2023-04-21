@@ -7,6 +7,7 @@ from working_with_files import zip_training
 from working_with_files.collections_training import wins
 from working_with_files.collections_training import task2_ordered_dict
 from working_with_files.collections_training import count_occurences
+from working_with_files.collections_training import task4_counter2
 
 
 class CsvTask13Test(TestCase):
@@ -104,6 +105,29 @@ class CollectionsTest(TestCase):
 
         self.assertEqual(result1, answer1)
         self.assertEqual(result2, answer2)
+
+    def test_task4_counter2(self):
+        test_stack = [
+            ("Говори говори до тех пор пока горем горим", '''Слов длины 2: 1
+Слов длины 4: 1
+Слов длины 6: 2
+Слов длины 3: 2
+Слов длины 5: 2'''),
+            ("abcde abcd abc ab a",
+            '''Слов длины 5: 1
+Слов длины 4: 1
+Слов длины 3: 1
+Слов длины 2: 1
+Слов длины 1: 1'''),
+            ("abcde abcde abcde abcde abcde abcde abcde", "Слов длины 5: 7"),
+            ("банан Малина арбуз Банан Черешня черешня малина банан клубника Вишня Банан Вишня Банан арбуз арбуз Банан арбуз арбуз Черешня банан", '''Слов длины 8: 1
+Слов длины 6: 2
+Слов длины 7: 3
+Слов длины 5: 14''')
+        ]
+        for data, answer in test_stack:
+            result = task4_counter2(data)
+            self.assertEqual(result, answer)
 
 
 if __name__ == "__main__":  # for debugging of tests themselves
