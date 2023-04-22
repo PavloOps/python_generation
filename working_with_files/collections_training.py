@@ -459,6 +459,24 @@ def task2_chainmap():
         print(line)
 
 
+def deep_update(chainmap: ChainMap, key: str, value: str):
+    if key in chainmap.keys():
+        for inner_dict in chainmap.maps:
+            if key in inner_dict:
+                inner_dict[key] = value
+    else:
+        chainmap.maps[0][key] = value
+
+
+def get_value(chainmap: ChainMap, key: str, from_left=True) -> str | None:
+    if from_left:
+        return chainmap.get(key)
+    else:
+        chainmap.maps.reverse()
+        result = chainmap.get(key)
+        return result
+
+
 def main():
     pass
 
