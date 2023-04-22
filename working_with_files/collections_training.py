@@ -5,6 +5,7 @@ from datetime import datetime
 from collections import defaultdict
 from collections import OrderedDict
 from collections import Counter
+from collections import ChainMap
 
 
 def task4_namedtuple():
@@ -423,6 +424,39 @@ def task10_counter2():
                 for name, *counts in rows:
                     counter.update({name: sum(map(int, counts))*prices[name]})
     print(counter.total())
+
+
+def task1_chainmap():
+    with open("zoo.json", encoding="utf-8") as json_file:
+        data = json.load(json_file)
+        common_dict = ChainMap(*data)
+        print(sum(common_dict.values()))
+
+
+def task2_chainmap():
+    bread = {'булочка с кунжутом': 15, 'обычная булочка': 10, 'ржаная булочка': 15}
+    meat = {'куриный бифштекс': 50, 'говяжий бифштекс': 70, 'рыбный бифштекс': 40}
+    sauce = {'сливочно-чесночный': 15, 'кетчуп': 10, 'горчица': 10, 'барбекю': 15, 'чили': 15}
+    vegetables = {'лук': 10, 'салат': 15, 'помидор': 15, 'огурцы': 10}
+    toppings = {'сыр': 25, 'яйцо': 15, 'бекон': 30}
+
+    ingredients = ChainMap(bread, meat, sauce, vegetables, toppings)
+    input_string = "сыр,сыр,сыр,сыр,сыр,сыр,сыр,сыр,сыр,сыр,сыр,сыр,сыр,сыр,сыр"
+
+    order = Counter(input_string.split(","))
+    ident, dot_line, total = len(max(order, key=len)), 0, 0
+
+    for ingredient in sorted(order):
+        amount = order[ingredient]
+        line = f"{ingredient.ljust(ident)} x {amount}"
+        dot_line = max(dot_line, len(line))
+        total += amount*ingredients[ingredient]
+        print(line)
+    else:
+        line = f"ИТОГ: {total}р"
+        dot_line = max(dot_line, len(line))
+        print(dot_line*"-")
+        print(line)
 
 
 def main():
