@@ -1,3 +1,6 @@
+now I'm working on the part "Exceptions"...
+
+
 # python_generation
 My ways of solving problems for "Python Generation" courses on https://pygen.ru/
 
@@ -6,8 +9,6 @@ $${\color{red}Warning:  \space I  \space strongly  \space don't  \space recommen
 ![alt text](https://i.redd.it/a518zgm0vt461.jpg)
 
 https://discord.com/invite/xZmV6AaBk8
-
-now I'm working on the part "Collections"
 
 https://stepik.org/cert/1635195
 
