@@ -4,10 +4,10 @@ from unittest import TestCase, main
 from working_with_files.csv_training import task_13
 from working_with_files.json_training import is_correct_json, task15
 from working_with_files import zip_training
-from working_with_files.collections_training import wins
-from working_with_files.collections_training import task2_ordered_dict
-from working_with_files.collections_training import count_occurences
-from working_with_files.collections_training import task4_counter2
+from collections.collections_training import wins
+from collections.collections_training import task2_ordered_dict
+from collections.collections_training import count_occurences
+from collections.collections_training import task4_counter2
 
 
 class CsvTask13Test(TestCase):

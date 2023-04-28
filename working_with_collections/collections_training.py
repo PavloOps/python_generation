@@ -351,7 +351,7 @@ def task4_counter():
 
 def task5_counter():
     count_dict = Counter()
-    with open("pythonzen.txt", encoding="utf-8") as txt_file:
+    with open("../working_with_files/pythonzen.txt", encoding="utf-8") as txt_file:
         for line in txt_file.readlines():
             count_dict.update(filter(str.isalpha, line.lower()))
         else:
@@ -393,7 +393,7 @@ def task6_counter2():
 
 def task7_counter2():
     counter = Counter()
-    with open("name_log2.csv", encoding="utf-8") as csv_file:
+    with open("../working_with_files/name_log2.csv", encoding="utf-8") as csv_file:
         for user in csv.DictReader(csv_file):
             counter.update({user['email']})
     for key, value in sorted(counter.items(), key=lambda x: x):
