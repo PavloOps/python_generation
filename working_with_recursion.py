@@ -98,6 +98,165 @@ def print_digits(number):
     print(number % 10)
 
 
+# part 3
+
+# task 1
+def count(number):
+    def rec(num, counter):
+        if num//10:
+            counter += 1
+            return rec(num//10, counter)
+        return counter + 1
+    return rec(number, 0)
+
+
+# task 3
+number_of_frogs = lambda x: 77 if x == 1 else 3*(number_of_frogs(x-1)-30)
+
+# task 4
+range_sum = lambda lst, start, end: lst[start] if start >= end else lst[start] + range_sum(lst, start+1, end)
+
+# task 5
+get_pow = lambda a, n: 1 if not n else a* get_pow(a, n-1)
+
+# task 6
+def get_fast_pow(a, n):
+    if not n:
+        return 1
+    elif not n%2:
+        return get_fast_pow(a*a, n//2)
+    else:
+        return a*get_fast_pow(a, n-1)
+
+# task 7
+recursive_sum = lambda a, b: a if not b else 1 + recursive_sum(a, b-1)
+
+# task 8
+is_power = lambda x: x == 1 if x <= 1 else is_power(x / 2)
+
+# task 9
+def tribonacci(n):
+    cache = {
+        1: 1,
+        2: 1,
+        3: 1
+    }
+
+    def rec_trib(n):
+        result = cache.get(n, 0)
+
+        if not result:
+            result = rec_trib(n - 1) + rec_trib(n - 2) + rec_trib(n - 3)
+            cache[n] = result
+
+        return result
+
+    return rec_trib(n)
+
+# without cache
+def tribonacci(n, f1=1, f2=1, f3=1) -> int:
+    if n == 1:
+        return f1
+    return tribonacci(n - 1, f2, f3, f1 + f2 + f3)
+
+# task 10
+def is_palindrome(string):
+    if len(string) in (0, 1):
+        return True
+
+    if string[0] != string[-1]:
+        return False
+
+    return is_palindrome(string[1:-1])
+
+# task 11
+def to_binary(number):
+    def rec_bin(num, result):
+        if num not in (0, 1):
+            result = [str(num % 2)] + result
+            return rec_bin(num // 2, result)
+
+        result = [str(num)] + result
+        return "".join(result)
+
+    return rec_bin(number, [])
+
+
+# task 12
+def without_cycles(number, subtrahend):
+    if number > 0:
+        print(number)
+        without_cycles(number - subtrahend, subtrahend)
+    print(number)
+
+
+# part 4
+
+# task 1
+def recursive_sum(nested_lists):
+    total = 0
+
+    for item in nested_lists:
+        if not isinstance(item, list):
+            total += item
+        else:
+            total += recursive_sum(item)
+    return total
+
+def recursive_sum(nested_list: list) -> int:
+    return sum((recursive_sum(el) if isinstance(el, list) else el for el in nested_list), start=0)
+
+
+def recursive_sum(obj):
+    if isinstance(obj, int):
+        return obj
+    return sum(map(recursive_sum, obj))
+
+
+# task 2
+def linear(nested_lists):
+    result_list = []
+
+    for item in nested_lists:
+        result_list += [item] if isinstance(item, int) else linear(item)
+    else:
+        return result_list
+
+# task 3
+def get_value(nested_dicts, key):
+    if key in nested_dicts:
+        return nested_dicts[key]
+    for k in nested_dicts.values():
+        if isinstance(k, dict):
+            res = get_value(k, key)
+            if res:
+                return res
+
+
+# task 4
+def get_all_values(nested_dict, key):
+    result = set()
+
+    if key in nested_dict:
+        result.add(nested_dict[key])
+
+    for item in nested_dict.values():
+        if isinstance(item, dict):
+            result |= get_all_values(item, key)
+
+    return result
+
+# task 5
+def dict_travel(nested_dicts, path=None):
+    for key, value in sorted(nested_dicts.items()):
+        if not isinstance(value, dict):
+            print(f"{path+'.'+str(key) if path else key}: {value}")
+        else:
+            dict_travel(nested_dicts[key], path=f"{path+'.'+str(key) if path else key}")
+
+
+
+
 def main():
     print_hundred(1, 100)
     print_list(numbers)
