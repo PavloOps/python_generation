@@ -60,3 +60,44 @@ def zip_longest(*args, fill=None):
 # task 12
 pattern = [*range(97, 123), *range(65,91), *range(49, 58, 2), *range(48, 58, 2)]
 print("".join(sorted(input(), key=lambda x: pattern.index(ord(x)))))
+
+### PART 2 ###
+
+# task 1
+def hash_as_key(obj):
+    result = dict()
+    for item in obj:
+        key = hash(item)
+        if key in result:
+            if isinstance(result[key], list):
+                result[key].extend([item])
+            else:
+                result[key] = [result[key], item]
+        else:
+            result[key] = item
+    return result
+
+
+# task 2
+operations = {
+    list: lambda x: x[-1],
+    tuple: lambda x: x[0],
+    set: lambda x: len(x),
+}
+
+it = eval(input())
+print(operations[type(it)](it))
+
+# task 3
+print(max(eval(x) for x in open(0)))
+
+# task 4
+func = input()
+a, b = map(int, input().split())
+values = [eval(func) for x in range(a, b+1)]
+
+print(f'''Минимальное значение функции {func} на отрезке [{a}; {b}] равно {min(values)}
+Максимальное значение функции {func} на отрезке [{a}; {b}] равно {max(values)}''')
+
+
+### PART 3 ###
