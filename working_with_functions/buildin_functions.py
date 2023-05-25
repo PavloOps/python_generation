@@ -140,3 +140,11 @@ names = ['ульяна', 'арина', 'Дмитрий', 'Сергей', 'Яна
 
 
 print(*sorted(x.title() for x in names if x[0].lower() in "ам" and len(x)>3), sep=" ")
+
+# task 4
+d = {1: 1, 2: 1}
+fib = lambda x: d[x] if x in d else d.setdefault(x, fib(x - 1) + fib(x - 2))
+
+# task 5
+def print_operation_table(operation=None, rows=None, cols=None):
+    [print(*[operation(n, m) for m in range(1, cols+1)]) for n in range(1, rows+1)]
