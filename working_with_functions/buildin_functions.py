@@ -3,6 +3,7 @@ convert = lambda num: tuple(n.upper().replace(f"0{char}", "") \
                             for n, char in zip((bin(num), oct(num), hex(num)), tuple("BOX")))
 
 # task 3
+from statistics import mean
 films = {'Spider-Man: No Way Home': {'imdb': 8.8, 'kinopoisk': 8.3},
          'Don"t Look Up': {'imdb': 7.3, 'kinopoisk': 7.6},
          'Encanto': {'imdb': 7.3, 'kinopoisk': 7.4},
@@ -148,3 +149,29 @@ fib = lambda x: d[x] if x in d else d.setdefault(x, fib(x - 1) + fib(x - 2))
 # task 5
 def print_operation_table(operation=None, rows=None, cols=None):
     [print(*[operation(n, m) for m in range(1, cols+1)]) for n in range(1, rows+1)]
+
+# task 6
+from string import ascii_letters, ascii_uppercase, ascii_lowercase, digits
+
+def verification(login, password, success, failure):
+    check_pass = set(password)
+    check_set = {
+        ascii_letters: "в пароле нет ни одной буквы",
+        ascii_uppercase: "в пароле нет ни одной заглавной буквы",
+        ascii_lowercase: "в пароле нет ни одной строчной буквы",
+        digits: "в пароле нет ни одной цифры"
+    }
+
+    for pattern, message in check_set.items():
+        if check_pass.isdisjoint(pattern):
+            return failure(login, message)
+    else:
+        return success(login)
+
+def success(login):
+    print(f'Привет, {login}!')
+
+def failure(login, text):
+    print(f'{login}, попробуйте снова. Ошибка: {text}')
+
+# verification('timyrik20', 'Beegeek314', success, failure)
