@@ -175,3 +175,20 @@ def failure(login, text):
     print(f'{login}, попробуйте снова. Ошибка: {text}')
 
 # verification('timyrik20', 'Beegeek314', success, failure)
+
+# task 7
+def remove_marks(text, marks):
+    for symbol in marks:
+        text = text.replace(symbol, '')
+    else:
+        remove_marks.count += 1
+        return text
+remove_marks.count = 0
+
+marks = '.,!?'
+text = 'Are you listening? Meet my family! There are my parents, my brother and me.'
+
+for mark in marks:
+    print(remove_marks(text, mark))
+
+print(remove_marks.count)
