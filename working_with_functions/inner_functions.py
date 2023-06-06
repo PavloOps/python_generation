@@ -30,3 +30,7 @@ def date_formatter(country_code):
              'pt': '%d-%m-%Y', }
         return input_date.strftime(d[country_code])
     return format_date
+
+
+def sort_priority(values, group):
+    return values.sort(key=lambda x: (x not in group, x))
