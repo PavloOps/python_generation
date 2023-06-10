@@ -34,3 +34,8 @@ def date_formatter(country_code):
 
 def sort_priority(values, group):
     return values.sort(key=lambda x: (x not in group, x))
+
+
+def get_digits(number: int | float) -> list[int]:
+    return list(map(int, str(abs(number)).replace('.', '')))
+
