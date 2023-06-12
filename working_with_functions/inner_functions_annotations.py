@@ -39,3 +39,12 @@ def sort_priority(values, group):
 def get_digits(number: int | float) -> list[int]:
     return list(map(int, str(abs(number)).replace('.', '')))
 
+
+def top_grade(grades: dict[str, str | list[int]]) -> dict[str, int]:
+    grades["top_grade"] = max(grades["grades"])
+    del grades["grades"]
+    return grades
+
+annotations = top_grade.__annotations__
+
+print(annotations['grades'])
