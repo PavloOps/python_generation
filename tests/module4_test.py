@@ -4,10 +4,11 @@ from unittest import TestCase, main
 from working_with_files.csv_training import task_13
 from working_with_files.json_training import is_correct_json, task15
 from working_with_files import zip_training
-from collections.collections_training import wins
-from collections.collections_training import task2_ordered_dict
-from collections.collections_training import count_occurences
-from collections.collections_training import task4_counter2
+from working_with_collections.collections_training import wins
+from working_with_collections.collections_training import task2_ordered_dict
+from working_with_collections.collections_training import count_occurences
+from working_with_collections.collections_training import task4_counter2
+from working_with_functions.inner_functions_annotations import cyclic_shift
 
 
 class CsvTask13Test(TestCase):
@@ -128,6 +129,20 @@ class CollectionsTest(TestCase):
         for data, answer in test_stack:
             result = task4_counter2(data)
             self.assertEqual(result, answer)
+
+
+class AnnotationTest(TestCase):
+    def test_cyclic_shift(self):
+        test_pack = [
+            ([1, 2, 3, 4, 5], 1, [5, 1, 2, 3, 4]),
+            ([1, 2, 3, 4, 5], -2, [3, 4, 5, 1, 2]),
+            ([1, 2.0, 3, 4.0, 5.5], 0, [1, 2.0, 3, 4.0, 5.5]),
+        ]
+
+        for lst, step, answer in test_pack:
+            cyclic_shift(lst, step)
+            self.assertEqual(lst, answer)
+    # here should be negative tests
 
 
 if __name__ == "__main__":  # for debugging of tests themselves

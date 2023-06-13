@@ -45,6 +45,11 @@ def top_grade(grades: dict[str, str | list[int]]) -> dict[str, int]:
     del grades["grades"]
     return grades
 
-annotations = top_grade.__annotations__
 
-print(annotations['grades'])
+def cyclic_shift(numbers: list[int], step: int) -> None:
+    if step > 0:
+        for _ in range(step):
+            numbers.insert(0, numbers.pop())
+    else:
+        for _ in range(abs(step)):
+            numbers.append(numbers.pop(0))
