@@ -53,3 +53,4 @@ def cyclic_shift(numbers: list[int], step: int) -> None:
     else:
         for _ in range(abs(step)):
             numbers.append(numbers.pop(0))
+
