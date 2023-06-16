@@ -7,3 +7,11 @@ def sandwich(func):
     return wrapper
 
 
+def new_print(func):
+    def wrapper(*args, **kwargs):
+        args = (x.upper() if isinstance(x, str) else x for x in args)
+        kwargs = {k: v.upper() if isinstance(v, str) else v for k, v in kwargs.items()}
+        func(*args, **kwargs)
+    return wrapper
+
+# print = new_print(print)
