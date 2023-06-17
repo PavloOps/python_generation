@@ -15,3 +15,10 @@ def new_print(func):
     return wrapper
 
 # print = new_print(print)
+
+def do_twice(func):
+    def wrapper(*args, **kwargs):
+        res = func(*args, **kwargs)
+        res = func(*args, **kwargs)
+        return res
+    return wrapper
