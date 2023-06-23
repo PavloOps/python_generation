@@ -1,3 +1,6 @@
+from functools import wraps
+
+
 def sandwich(func):
     def wrapper(*args, **kwargs):
         print("---- Верхний ломтик хлеба ----")
@@ -22,3 +25,23 @@ def do_twice(func):
         res = func(*args, **kwargs)
         return res
     return wrapper
+
+
+def square(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        res = func(*args, **kwargs)
+        return res**2
+    return wrapper
+
+
+def returns_string(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        res = func(*args, **kwargs)
+        if isinstance(res, str):
+            return res
+        else:
+            raise TypeError
+    return wrapper
+
