@@ -45,3 +45,11 @@ def returns_string(func):
             raise TypeError
     return wrapper
 
+
+def trace(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        res = func(*args, **kwargs)
+        print((f'TRACE: вызов {func.__name__}() с аргументами: {args}, {kwargs}\nTRACE: возвращаемое значение {func.__name__}(): {repr(res)}'))
+        return res
+    return wrapper
