@@ -53,3 +53,16 @@ def trace(func):
         print((f'TRACE: вызов {func.__name__}() с аргументами: {args}, {kwargs}\nTRACE: возвращаемое значение {func.__name__}(): {repr(res)}'))
         return res
     return wrapper
+
+
+def prefix(string, to_the_end=False):
+    def add_string(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            res = func(*args, **kwargs)
+            if to_the_end:
+                return res + string
+            else:
+                return string + res
+        return wrapper
+    return add_string
