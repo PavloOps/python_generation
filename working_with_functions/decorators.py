@@ -66,3 +66,20 @@ def prefix(string, to_the_end=False):
                 return string + res
         return wrapper
     return add_string
+
+
+def takes(*check_list_args):
+    def check_types(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            res_check = all(
+                [isinstance(elem, tuple(check_list_args))
+                 for elem in [*args, *kwargs.values()]]
+            )
+
+            if not res_check:
+                raise TypeError
+
+            return func(*args, **kwargs)
+        return wrapper
+    return check_types
