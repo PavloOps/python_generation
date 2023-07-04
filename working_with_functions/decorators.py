@@ -93,3 +93,15 @@ def add_attrs(**attrs):
         wrapper.__dict__ |= attrs
         return wrapper
     return decorator
+
+
+def ignore_exception(*allowed_exeptions):
+    def check_exceptions(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            try:
+                return func(*args, **kwargs)
+            except allowed_exeptions as error:
+                print(f"Исключение {error.__class__.__name__} обработано")
+        return wrapper
+    return check_exceptions
