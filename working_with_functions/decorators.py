@@ -105,3 +105,22 @@ def ignore_exception(*allowed_exeptions):
                 print(f"Исключение {error.__class__.__name__} обработано")
         return wrapper
     return check_exceptions
+
+
+class MaxRetriesException(Exception):
+    pass
+
+
+def retry(times):
+    def run_function(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            for _ in range(times):
+                try:
+                    return func(*args, **kwargs)
+                except Exception:
+                    continue
+            else:
+                raise MaxRetriesException
+        return wrapper
+    return run_function
